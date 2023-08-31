@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.cache.mapper.BluePrintMapper">
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO eve_blue_print VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.name},#{item.nameEn},#{item.maxLimit},#{item.copyTime},#{item.manufacturingTime},
+            #{item.researchMaterialTime},#{item.researchTimeTime},#{item.inventionTime },#{item.reactionTime}
+            ,#{item.groupId},
+            #{item.groupName},#{item.groupNameEn},#{item.metaGroupId},#{item.metaGroupName},#{item.metaGroupNameEn},#{item.marketGroupId},#{item.marketGroupName},#{item.marketGroupNameEn},
+            #{item.categoryId},#{item.categoryName},#{item.categoryNameEn},
+             now())
+        </foreach>
+    </insert>
+
+</mapper>

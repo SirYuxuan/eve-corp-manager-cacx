@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.account.mapper.AccountContractMapper">
+
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO corp_account_contract VALUES
+        <foreach collection="list" item="item" separator=",">
+            (null,#{item.contractId},#{item.userId},#{item.accountId},#{item.characterId},#{item.characterName},
+            #{item.acceptorId},
+            #{item.acceptorName},
+            #{item.acceptorType},
+            #{item.assigneeId},
+            #{item.assigneeName},
+            #{item.assigneeType},
+            #{item.availability},
+            #{item.buyout},
+            #{item.collateral},
+            #{item.dateAccepted},
+            #{item.dateCompleted},
+            #{item.dateExpired},
+            #{item.dateIssued},
+            #{item.daysToComplete},
+            #{item.endLocationId},
+            #{item.endLocationName},
+            #{item.forCorporation},
+            #{item.issuerCorporationId},
+            #{item.issuerCorporationName},
+            #{item.issuerId},
+            #{item.issuerName},
+            #{item.price},
+            #{item.reward},
+            #{item.startLocationId},
+            #{item.startLocationName},
+            #{item.status},
+            #{item.title},
+            #{item.type},
+            #{item.volume},
+            #{item.createTime},#{item.createId},#{item.createBy},null,null,null)
+        </foreach>
+    </insert>
+
+</mapper>

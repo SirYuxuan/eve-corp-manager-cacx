@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <script src='../js/echarts.js'></script>
+</head>
+<body>
+<div id="container">
+    <div id='price_chart'></div>
+</div>
+<style>
+    #price_chart {
+        margin-top: 30px;
+        width: 800px;
+        height: 400px;
+    }
+</style>
+</body>
+<script type='text/javascript'>
+
+    // 指定图表的配置项和数据
+    let times = ['@time']
+
+    option = {
+        animation: false,
+        title: {
+            text: ''
+        },
+        legend: {},
+        grid: {
+            containLabel: false,
+        },
+        toolbox: {
+            show: false
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: times
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter(val) {
+                    if (val < 1000000) {
+                        return parseFloat(val) / 1000000 + ' M'
+                    }
+                    return parseFloat(val) / 1000000000 + ' B'
+                }
+            },
+        },
+        series: [
+            {
+                name: 'Sell',
+                type: 'line',
+                data: ['@sell'],
+                smooth: true
+            },
+            {
+                name: 'Buy',
+                type: 'line',
+                data: ['@buy'],
+                smooth: true
+            }
+        ]
+    };
+
+    let myChart = echarts.init(document.getElementById('price_chart'));
+    myChart.setOption(option);
+</script>
+</html>

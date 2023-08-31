@@ -1,0 +1,5 @@
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.utils.mapper.SrpLogMapper">
+
+
+    <resultMap type="com.yuxuan66.ecmc.modules.utils.entity.SrpLog" id="srpLog">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="status" property="status"/>
+        <result column="kill_mail_id" property="killMailId"/>
+        <result column="content" property="content"/>
+        <result column="sp_content" property="spContent"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_id" property="updateId"/>
+        <result column="update_time" property="updateTime"/>
+
+
+        <association property="accountKillMail" javaType="com.yuxuan66.ecmc.modules.account.entity.AccountKillMail">
+            <id column="kmId" property="id"/>
+            <result column="character_id" property="characterId"/>
+            <result column="character_name" property="characterName"/>
+            <result column="corporation_id" property="corporationId"/>
+            <result column="corporation_name" property="corporationName"/>
+            <result column="alliance_id" property="allianceId"/>
+            <result column="alliance_name" property="allianceName"/>
+            <result column="is_npc" property="isNpc"/>
+            <result column="solar_system_name" property="solarSystemName"/>
+            <result column="damage_taken" property="damageTaken"/>
+            <result column="ship_type_id" property="shipTypeId"/>
+            <result column="ship_type_name" property="shipTypeName"/>
+            <result column="realKmId" property="killMailId"/>
+            <result column="kill_mail_hash" property="killMailHash"/>
+            <result column="kill_mail_time" property="killMailTime"/>
+        </association>
+
+    </resultMap>
+
+    <!-- 分页查询补损提交记录 -->
+    <select id="selectSrpLog" resultMap="srpLog">
+        select *,cakm.id kmId,cakm.kill_mail_id realKmId from corp_srp_log csl left join corp_account_kill_mail cakm on
+        csl.kill_mail_id = cakm.id
+        <where>
+            <if test="query.userId != null">
+                and csl.user_id = #{query.userId}
+            </if>
+            <if test="query.status != null">
+                and csl.status = #{query.status}
+            </if>
+        </where>
+    </select>
+
+</mapper>

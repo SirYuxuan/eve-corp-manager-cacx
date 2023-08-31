@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.system.mapper.UserMapper">
+
+    <resultMap type="com.yuxuan66.ecmc.modules.system.entity.User" id="user">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="status" property="status"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="sex" property="sex"/>
+        <result column="avatar" property="avatar"/>
+        <result column="qq" property="qq"/>
+        <result column="city" property="city"/>
+        <result column="login_time" property="loginTime"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="login_city" property="loginCity"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_id" property="updateId"/>
+        <result column="update_by" property="updateBy"/>
+
+        <collection property="menus" ofType="com.yuxuan66.ecmc.modules.system.entity.Menu">
+            <id column="mId" property="id"/>
+            <result column="mName" property="name"/>
+            <result column="pid" property="pid"/>
+            <result column="type" property="type"/>
+            <result column="icon" property="icon"/>
+            <result column="is_link" property="isLink"/>
+            <result column="frame" property="frame"/>
+            <result column="link_url" property="linkUrl"/>
+            <result column="cache" property="cache"/>
+            <result column="hidden" property="hidden"/>
+            <result column="permission" property="permission"/>
+            <result column="path" property="path"/>
+            <result column="component" property="component"/>
+            <result column="sort" property="sort"/>
+        </collection>
+
+        <collection property="roles" ofType="com.yuxuan66.ecmc.modules.system.entity.Role">
+            <id column="rId" property="id"/>
+            <result column="rName" property="name"/>
+            <collection property="menus" ofType="com.yuxuan66.ecmc.modules.system.entity.Menu">
+                <id column="mId" property="id"/>
+                <result column="mName" property="name"/>
+                <result column="pid" property="pid"/>
+                <result column="type" property="type"/>
+                <result column="icon" property="icon"/>
+                <result column="is_link" property="isLink"/>
+                <result column="frame" property="frame"/>
+                <result column="link_url" property="linkUrl"/>
+                <result column="cache" property="cache"/>
+                <result column="hidden" property="hidden"/>
+                <result column="permission" property="permission"/>
+                <result column="path" property="path"/>
+                <result column="component" property="component"/>
+                <result column="sort" property="sort"/>
+            </collection>
+        </collection>
+
+    </resultMap>
+
+    <!-- 用户列表查询条件 -->
+    <sql id="userWhere">
+        <where>
+            <if test="query.blurry != null and query.blurry != ''">
+                and (u.nick_name like concat('%',#{query.blurry},'%') or u.email like concat('%',#{query.blurry},'%') or u.username like concat('%',#{query.blurry},'%') or u.phone like concat('%',#{query.blurry},'%'))
+            </if>
+            <if test="query.createTime != null and query.createTime.length == 2">
+                and u.create_time >= #{query.createTime[0],javaType=java.lang.String} and u.create_time &lt;= #{query.createTime[1],javaType=java.lang.String}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 根据用户ID查询用户详细信息 -->
+    <select id="findUserById" resultMap="user">
+        select u.*,
+               r.id   as rId,
+               r.name as rName,
+               m.id      mId,
+               m.name mName,
+               m.*
+        from sys_user u
+                 LEFT JOIN sys_users_roles ur on ur.user_id = u.id
+                 LEFT JOIN sys_role r on ur.role_id = r.id
+                 LEFT JOIN sys_roles_menus rm on ur.role_id = rm.role_id
+                 LEFT JOIN sys_menu m on rm.menu_id = m.id
+        where u.id = #{userId}
+        order by u.id, m.sort asc
+    </select>
+
+
+    <!-- 分页查询用户列表 -->
+    <select id="listUser" resultMap="user">
+        select u.*,
+        r.id as rId,
+        r.name as rName
+        from (select * from sys_user u <include refid="userWhere" />
+        <if test="query.size > 0">
+            LIMIT #{query.limitStart},#{query.size}
+        </if>
+        ) u
+        LEFT JOIN sys_users_roles ur on ur.user_id = u.id
+        LEFT JOIN sys_role r on ur.role_id = r.id
+    </select>
+
+    <!-- 分页查询用户列表的条数 -->
+    <select id="countUser" resultType="java.lang.Long">
+        select count(1) from sys_user u <include refid="userWhere" />
+    </select>
+
+    <!-- 查询拥有指定权限的用户 -->
+    <select id="selectByPermCode" resultType="com.yuxuan66.ecmc.modules.system.entity.User">
+        select *
+        from sys_user
+        where id in (select user_id
+                     from sys_users_roles
+                     where role_id in
+                           (select role_id
+                            from sys_roles_menus
+                            where menu_id = (select id from sys_menu where permission = #{permCode} limit 1)))
+    </select>
+
+
+</mapper>

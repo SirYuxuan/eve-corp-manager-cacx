@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/eve_corp_manager_cacx?useSSL=false
+    username: root
+    password: root
+    ##  Hikari 连接池配置 ------ 详细配置请访问：https://github.com/brettwooldridge/HikariCP
+    hikari:
+      ## 最小空闲连接数量
+      minimum-idle: 10
+      ## 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 18000
+      ## 连接池最大连接数，默认是10
+      maximum-pool-size: 1000
+      ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      ## 连接池名字
+      pool-name: RdtHikariCP
+      ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      ## 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 300000
+      connection-test-query: SELECT 1
+

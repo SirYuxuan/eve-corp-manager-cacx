@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.account.mapper.AccountWalletMapper">
+
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO corp_account_wallet VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.journalId},#{item.userId},#{item.accountId},#{item.characterId},#{item.characterName},
+            #{item.amount},
+            #{item.balance},
+            #{item.contextId},
+            #{item.contextIdType},
+            #{item.date},
+            #{item.firstPartyId},
+            #{item.firstPartyName},
+            #{item.firstPartyType},
+            #{item.description},
+            #{item.reason},
+            #{item.refType},
+            #{item.secondPartyId},
+            #{item.secondPartyName},
+            #{item.secondPartyType},
+            #{item.tax},
+            #{item.taxReceiverId},
+            #{item.createTime},#{item.createId},#{item.createBy},null,null,null)
+        </foreach>
+    </insert>
+
+</mapper>

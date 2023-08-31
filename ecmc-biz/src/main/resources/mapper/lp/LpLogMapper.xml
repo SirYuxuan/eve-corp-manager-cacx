@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.lp.mapper.LpLogMapper">
+
+
+    <resultMap type="com.yuxuan66.ecmc.modules.lp.entity.LpLog" id="lpLog">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="lp" property="lp"/>
+        <result column="source" property="source"/>
+        <result column="type" property="type"/>
+        <result column="content" property="content"/>
+        <result column="order_id" property="orderId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="create_by" property="createBy"/>
+
+
+        <association property="userAccount" javaType="com.yuxuan66.ecmc.modules.account.entity.UserAccount">
+            <id column="account_id" property="id"/>
+            <result column="character_id" property="characterId"/>
+            <result column="character_name" property="characterName"/>
+            <result column="corp_id" property="corpId"/>
+            <result column="corp_name" property="corpName"/>
+            <result column="alliance_id" property="allianceId"/>
+            <result column="alliance_name" property="allianceName"/>
+        </association>
+
+    </resultMap>
+
+    <select id="selectLpLog" resultMap="lpLog">
+        select * from corp_lp_log srp left join corp_user_account cua on srp.account_id = cua.id
+        <where>
+            <if test="query.blurry != null and query.blurry != ''">
+                and (srp.character_name like concat('%',#{query.blurry},'%') or srp.content like concat('%',#{query.blurry},'%') )
+            </if>
+            <if test="query.source != null">
+                and srp.source = #{query.source}
+            </if>
+            <if test="query.type != null">
+                and srp.type = #{query.type}
+            </if>
+
+            <if test="query.userId != null">
+                and srp.user_id = #{query.userId}
+            </if>
+        </where>
+        order by srp.create_time desc
+    </select>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO corp_lp_log VALUES
+        <foreach collection="lpLogList" item="item" separator=",">
+            (null,#{item.userId},#{item.accountId},#{item.characterName},#{item.lp},#{item.source},#{item.type},
+            #{item.content},#{item.orderId},#{item.createBy},#{item.createId},#{item.createTime},null,null,null)
+        </foreach>
+    </insert>
+
+</mapper>

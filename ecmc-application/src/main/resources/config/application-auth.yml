@@ -1,0 +1,5 @@
+sa-token:
+  token-style: random-32
+  is-share: false
+  token-name: ECMCToken
+  is-print: false

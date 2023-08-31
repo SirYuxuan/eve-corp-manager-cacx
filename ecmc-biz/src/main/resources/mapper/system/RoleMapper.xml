@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.system.mapper.RoleMapper">
+
+
+    <resultMap type="com.yuxuan66.ecmc.modules.system.entity.Role" id="role">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+
+        <collection property="menus" ofType="com.yuxuan66.ecmc.modules.system.entity.Menu">
+            <id column="mId" property="id"/>
+            <result column="mName" property="name"/>
+        </collection>
+
+    </resultMap>
+
+    <!-- 角色列表查询条件 -->
+    <sql id="roleWhere">
+        <where>
+            <if test="query.blurry != null and query.blurry != ''">
+                and (r.name like concat('%',#{query.blurry},'%') or r.remark like concat('%',#{query.blurry},'%'))
+            </if>
+            <if test="query.createTime != null and query.createTime.length == 2">
+                and r.create_time >= #{query.createTime[0],javaType=java.lang.String} and r.create_time &lt;= #{query.createTime[1],javaType=java.lang.String}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 分页查询角色列表 -->
+    <select id="listRole" resultMap="role">
+        select u.*,m.id mId,m.name mName
+        from (select * from sys_role r <include refid="roleWhere" />
+        <if test="query.size > 0">
+            LIMIT #{query.limitStart},#{query.size}
+        </if>
+        ) u
+        LEFT JOIN sys_roles_menus rm on rm.role_id = u.id
+        LEFT JOIN sys_menu m on rm.menu_id = m.id and rm.virtually = 0
+
+    </select>
+
+    <!-- 分页查询用户列表的条数 -->
+    <select id="countRole" resultType="java.lang.Long">
+        select count(1) from sys_role r <include refid="roleWhere" />
+    </select>
+
+</mapper>

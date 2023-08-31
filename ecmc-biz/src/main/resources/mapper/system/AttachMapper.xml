@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.common.upload.mapper.AttachMapper">
+
+
+    <!-- 批量插入附件 -->
+    <insert id="batchInsert">
+        insert into sys_attach values
+        <foreach collection="list" item="item" separator=",">
+            (null,#{item.uploadType},#{item.filePath},#{item.url},#{item.fileName},#{item.originalName},#{item.md5},#{item.createTime},#{item.createId},#{item.createBy})
+        </foreach>
+    </insert>
+
+
+
+</mapper>

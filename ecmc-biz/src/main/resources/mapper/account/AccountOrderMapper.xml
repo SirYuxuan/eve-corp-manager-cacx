@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.account.mapper.AccountOrderMapper">
+
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO corp_account_order VALUES
+        <foreach collection="list" item="item" separator=",">
+            (null,#{item.orderId},#{item.userId},#{item.accountId},#{item.characterId},#{item.characterName},
+            #{item.clientId},
+            #{item.clientName},
+            #{item.clientType},
+            #{item.date},
+            #{item.isBuy},
+            #{item.isPersonal},
+            #{item.journalRefId},
+            #{item.locationId},
+            #{item.locationName},
+            #{item.quantity},
+            #{item.unitPrice},
+            #{item.typeId},
+            #{item.typeName},
+            #{item.createTime},#{item.createId},#{item.createBy},null,null,null)
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxuan66.ecmc.modules.account.mapper.AccountContractItemMapper">
+
+
+    <!-- 批量插入 -->
+    <insert id="batchInsert">
+        INSERT INTO corp_account_contract_item VALUES
+        <foreach collection="list" item="item" separator=",">
+            (null,#{item.accountId},#{item.contractId},#{item.isIncluded},#{item.isSingleton},#{item.quantity},#{item.rawQuantity},#{item.recordId},#{item.typeId},#{item.typeName},#{item.sellPrice},#{item.buyPrice})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,7 @@
+server:
+  port: 3001
+spring:
+  profiles:
+    include:  db, redis, logging
+  mvc:
+    throw-exception-if-no-handler-found: true
