@@ -12,11 +12,6 @@
     <artifactId>ecmc-application</artifactId>
     <dependencies>
 
-        <dependency>
-            <groupId>com.yuxuan66</groupId>
-            <artifactId>bot-fix</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!-- QQ Bot -->
         <dependency>
             <groupId>net.mamoe</groupId>
