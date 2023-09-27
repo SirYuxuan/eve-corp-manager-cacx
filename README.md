@@ -1,5 +1,5 @@
 ## 项目目录介绍
-有问题或定制请联系 QQ：1718018032
+有问题或定制请联系 QQ：1718018032 WX：gfh229_
 1. application = 军团系统主程序API
 2. biz = 军团业务处理中心
 3. discord = discord机器人程序
@@ -16,9 +16,7 @@
 7. 启动idea直接运行ecmc-application中的EcmcApplication.java
 8. 打包执行maven clean package
 9. CentOS下后台执行 `nohup java -jar ecmcApp.jar > cataline.out 2>&1 &`
-```shell
-QQ讨论群：255369105
-```
+
 ### 界面展示：
 ![WX20230901-085242@2x.png](images%2FWX20230901-085242%402x.png)
 ![WX20230901-085426@2x.png](images%2FWX20230901-085426%402x.png)
