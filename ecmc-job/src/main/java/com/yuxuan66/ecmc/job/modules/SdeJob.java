@@ -45,11 +45,10 @@ public class SdeJob  {
     private final EveCache eveCache;
 
 
-    @PostConstruct
     public void process() throws Exception {
         // 开始读取各个文件清洗数据库并清洗缓存
         // 第一步 语言包
-        String basePath = "/mnt/";
+        String basePath = "/Users/yuxuan/Downloads/";
 
         // 第二步 分类
         List<Category> categoryList = SdeUtil.getCategoryList(basePath);
