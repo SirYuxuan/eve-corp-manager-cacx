@@ -1,1 +1,1 @@
-## 基于vbean admin开发的混沌军团管理系统
+## 基于vbean admin开发的华夏帝国军团系统

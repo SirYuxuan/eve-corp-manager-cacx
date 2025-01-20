@@ -9,17 +9,17 @@ public class SdeConst {
     /**
      * 物品id和汉化所在目录
      */
-    public static final String TYPE_ID = "/sde/fsd/typeIDs.yaml";
+    public static final String TYPE_ID = "/sde/fsd/types.yaml";
 
     /**
      * eve分类文件
      */
-    public static final String CATEGORY_ID = "/sde/fsd/categoryIDs.yaml";
+    public static final String CATEGORY_ID = "/sde/fsd/categories.yaml";
 
     /**
      * eve分组文件
      */
-    public static final String GROUP_ID = "/sde/fsd/groupIDs.yaml";
+    public static final String GROUP_ID = "/sde/fsd/groups.yaml";
     /**
      * eve元分组文件
      */

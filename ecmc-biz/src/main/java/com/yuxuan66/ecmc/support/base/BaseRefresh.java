@@ -51,10 +51,10 @@ public class BaseRefresh {
                 int totalPage = PageUtil.totalPage(ids.size(), 1000);
                 for (int i = 0; i < totalPage; i++) {
                     List<Integer> tempIds = ListUtil.page(i, 1000, ids);
-                    result.addAll(new UniverseApi().postUniverseNames(new HashSet<>(tempIds).stream().toList(),null));
+                    result.addAll(new UniverseApi().postUniverseNames(new HashSet<>(tempIds),null));
                 }
             }else{
-                result = new UniverseApi().postUniverseNames(new HashSet<>(ids).stream().toList(),null);
+                result = new UniverseApi().postUniverseNames(new HashSet<>(ids),null);
             }
         }
         return result;

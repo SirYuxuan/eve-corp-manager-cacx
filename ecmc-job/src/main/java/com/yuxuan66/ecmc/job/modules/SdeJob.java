@@ -5,9 +5,11 @@ import com.yuxuan66.ecmc.cache.entity.*;
 import com.yuxuan66.ecmc.cache.mapper.*;
 import com.yuxuan66.ecmc.job.utils.SdeUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Optional;
 @Component
 @Transactional(rollbackFor = Exception.class)
 @RequiredArgsConstructor
+@DependsOn("staticComp")
 public class SdeJob  {
     @Resource
     private TypeMapper typeMapper;
@@ -42,10 +45,11 @@ public class SdeJob  {
     private final EveCache eveCache;
 
 
+    @PostConstruct
     public void process() throws Exception {
         // 开始读取各个文件清洗数据库并清洗缓存
         // 第一步 语言包
-        String basePath = "";
+        String basePath = "/mnt/";
 
         // 第二步 分类
         List<Category> categoryList = SdeUtil.getCategoryList(basePath);

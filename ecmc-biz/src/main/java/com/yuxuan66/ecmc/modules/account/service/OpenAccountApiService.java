@@ -156,7 +156,7 @@ public class OpenAccountApiService extends BaseService<UserAccount, UserAccountM
         result += "共获得: " + accountInfo.getAccountList().stream().map(UserAccount::getLpTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
         result += "\r\n已使用: " + accountInfo.getAccountList().stream().map(UserAccount::getLpUse).reduce(BigDecimal.ZERO, BigDecimal::add);
         result += "\r\n现剩余: " + accountInfo.getAccountList().stream().map(UserAccount::getLpNow).reduce(BigDecimal.ZERO, BigDecimal::add);
-        result += "\r\n感谢您为混沌做出的贡献!";
+        result += "\r\n感谢您为华夏帝国做出的贡献!";
         return result;
     }
 

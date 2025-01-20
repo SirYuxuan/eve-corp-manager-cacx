@@ -2,4 +2,5 @@ logging:
   level:
     root: info
     com:
+      yuxuan66: debug
       baomidou: error

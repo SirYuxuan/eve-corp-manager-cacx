@@ -46,7 +46,7 @@
       <FormItem class="enter-x" name="policy">
         <!-- No logic, you need to deal with it yourself -->
         <Checkbox v-model:checked="formData.policy" size="small">
-          我同意混沌仲裁者注册协议
+          我同意华夏帝国注册协议
         </Checkbox>
       </FormItem>
 

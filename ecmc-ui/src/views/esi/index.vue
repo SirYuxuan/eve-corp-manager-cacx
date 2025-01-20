@@ -37,7 +37,7 @@
         </template>
         <template v-if="column.key === 'esi'">
           <Tag :color="record.accessToken ? 'green' : 'blue'">
-            {{ record.accessToken ? 'CACX FULL' : 'ERROR' }}
+            {{ record.accessToken ? 'DG FULL' : 'ERROR' }}
           </Tag>
         </template>
         <template v-if="column.key === 'isMain'">

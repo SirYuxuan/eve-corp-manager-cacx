@@ -7,6 +7,7 @@ import com.yuxuan66.ecmc.cache.redis.RedisKit;
 import com.yuxuan66.ecmc.common.upload.mapper.AttachMapper;
 import com.yuxuan66.ecmc.modules.system.mapper.ConfigMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

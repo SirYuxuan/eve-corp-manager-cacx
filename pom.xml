@@ -8,7 +8,7 @@
     <artifactId>eve-corp-manager-cacx</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
-    <description>混沌军团管理系统</description>
+    <description>华夏帝国军团系统</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,7 +35,7 @@
         <sa-token.version>1.33.0</sa-token.version>
         <fastjson.version>2.0.12</fastjson.version>
         <poi.version>4.1.2</poi.version>
-        <eve-esi.version>4.8.0</eve-esi.version>
+        <eve-esi.version>4.9.0</eve-esi.version>
         <annotation-api.version>1.3.2</annotation-api.version>
         <aliyun.core.version>4.6.3</aliyun.core.version>
         <aliyun.oss.version>3.16.0</aliyun.oss.version>

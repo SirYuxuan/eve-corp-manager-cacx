@@ -55,8 +55,10 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       https: false,
       // Listening on all local IPs
-      host: true,
+      host: '0.0.0.0',
       port: VITE_PORT,
+      strictPort: true,
+      cors: true,
       // Load proxy configuration from .env
       proxy: createProxy(VITE_PROXY),
     },

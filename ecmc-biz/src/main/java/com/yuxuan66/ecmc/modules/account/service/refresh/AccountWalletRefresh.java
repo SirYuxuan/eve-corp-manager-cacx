@@ -47,8 +47,8 @@ public class AccountWalletRefresh {
             List<Integer> secondPartIdList = saveList.stream().map(CharacterWalletJournalResponse::getSecondPartyId).toList();
             List<Integer> firstPartyList = saveList.stream().map(CharacterWalletJournalResponse::getFirstPartyId).toList();
             UniverseApi universeApi = new UniverseApi();
-            List<UniverseNamesResponse> secondPartName = secondPartIdList.isEmpty() ? new ArrayList<>() : universeApi.postUniverseNames(new HashSet<>(secondPartIdList).stream().toList(), "");
-            List<UniverseNamesResponse> firstPartyName = firstPartyList.isEmpty() ? new ArrayList<>() : universeApi.postUniverseNames(new HashSet<>(firstPartyList).stream().toList(), "");
+            List<UniverseNamesResponse> secondPartName = secondPartIdList.isEmpty() ? new ArrayList<>() : universeApi.postUniverseNames(new HashSet<>(secondPartIdList), "");
+            List<UniverseNamesResponse> firstPartyName = firstPartyList.isEmpty() ? new ArrayList<>() : universeApi.postUniverseNames(new HashSet<>(firstPartyList), "");
             Map<Integer, UniverseNamesResponse> secondPartNameMap = new HashMap<>(secondPartName.size());
             Map<Integer, UniverseNamesResponse> firstPartyNameMap = new HashMap<>(firstPartyName.size());
             secondPartName.forEach(item -> secondPartNameMap.put(item.getId(), item));

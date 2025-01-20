@@ -65,8 +65,8 @@ export default {
     signUpFormTitle: '注册',
     forgetFormTitle: '重置密码',
 
-    signInTitle: '混沌军团管理系统',
-    signInDesc: '混沌有你更加美好！',
+    signInTitle: '华夏帝国军团系统',
+    signInDesc: '华夏帝国有你更加美好！',
     policy: '我同意xxx隐私政策',
     scanSign: '扫码后点击"确认"，即可完成登录',
 
