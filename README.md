@@ -1,5 +1,5 @@
 ## 项目目录介绍
-有问题或定制请联系 QQ：1718018032 WX：gfh229_
+有问题或定制请联系  WX：gfh229_
 1. application = 军团系统主程序API
 2. biz = 军团业务处理中心
 3. discord = discord机器人程序
